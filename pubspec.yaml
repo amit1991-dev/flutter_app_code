@@ -1,0 +1,175 @@
+name: getx
+description: Gravity Test Series for Students!
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: none! # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+148
+
+environment:
+  sdk: '>=2.19.0-171.0.dev <4.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+
+dependencies:
+  flutter:
+    sdk: flutter
+  disable_battery_optimization: ^1.1.1
+  shared_preferences: ^2.3.2
+  flutter_pdfview: ^1.3.2
+  # wakelock_plus: ^1.1.3
+  wakelock_plus: ^1.2.8
+  no_screenshot: ^0.3.1
+  # get: ^4.6.6
+  get: ^5.0.0-release-candidate-9.2
+  # http: ^1.1.1
+  http: ^1.2.2
+  get_storage: ^2.0.3
+  # otp_autofill: ^2.1.0
+  otp_autofill: ^4.0.0
+  # rive: ^0.9.1
+  rive: ^0.12.0   
+  back_button_interceptor: ^7.0.3
+  # dio: ^5.0.0
+  dio: ^5.6.0
+  dio_http2_adapter: ^2.5.3
+  # dio: ^4.0.6
+  # flutter_tex: ^4.0.6
+  # flutter_otp_text_field: ^1.1.0+2
+  flutter_otp_text_field: ^1.2.0
+  otp_text_field: ^1.1.3
+  timeago: ^3.3.0
+  intl_phone_field: ^3.2.0
+  google_fonts:
+  onboarding: ^4.0.2
+  video_player: ^2.4.7
+  razorpay_flutter: ^1.3.4
+  animate_do: ^2.1.0
+  # flutter_google_places: ^0.3.0
+  syncfusion_flutter_datepicker: ^20.3.50
+  intl: ^0.17.0
+  # google_place: ^0.4.7
+  autocomplete_textfield: ^2.0.1
+  flutter_dotenv: ^5.0.2
+  video_thumbnail: ^0.5.3
+  qr_flutter: ^4.0.0
+  mobile_scanner: ^2.0.0
+  # async_builder: ^1.2.0
+  async_builder: ^1.3.1+1
+  syncfusion_flutter_sliders: ^20.3.50
+  syncfusion_flutter_charts: ^20.4.49
+  curved_navigation_bar: ^1.0.3
+  search_page: ^2.2.0
+  # simple_s3: 0.3.2
+  image_picker: ^0.8.6
+  search_choices: ^2.1.5
+  # dropdown_button2: ^1.9.1
+  dropdown_button2: ^2.3.9
+  # carousel_slider: ^4.1.1
+  carousel_slider: ^5.0.0
+  flutter_rating_bar: ^4.0.1
+  geocoding: ^2.0.5
+  # location: ^4.2.0
+  location: ^4.4.0
+  dropdown_textfield: ^1.0.7
+  introduction_screen: ^3.1.0
+  photo_view: ^0.14.0
+  permission_handler: ^10.2.0
+  persistent_bottom_nav_bar: ^5.0.2
+  flutter_launcher_icons: "^0.11.0"
+  # connectivity_plus: ^3.0.2
+  connectivity_plus: ^5.0.2
+  # uuid: ^3.0.7
+  uuid: ^4.5.0
+  numberpicker: ^2.1.2
+  change_app_package_name: ^1.0.0
+  flutter_tex: ^4.0.9
+#  flutter_tex: ^4.0.3+4
+  # flutter_tex:
+    # path: ./custom_packages/flutter_tex_2
+  url_launcher: ^6.1.9
+  glass_kit: ^3.0.0
+  animated_text_kit: ^4.2.2
+#  quotes_widget:
+  # tab_container: ^2.0.0
+  tab_container: ^3.5.3
+  smooth_video_progress: ^0.0.4
+  flutter_downloader: ^1.10.2
+  path_provider: ^2.0.14
+  youtube_player_flutter: ^8.1.2
+  # youtube_player_flutter: ^9.0.3
+  flutter_toggle_tab: ^1.3.0
+#  expandable_search_bar: ^0.0.1
+  cupertino_icons: ^1.0.2
+  package_info_plus: ^8.0.2
+  # webview_flutter: ^2.8.0
+  webview_flutter: ^4.4.4
+  internet_connection_checker_plus: ^2.2.0
+  # flutter_inappwebview: ^6.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/gravity_icon.png"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/images/
+    - assets/rive/
+    - assets/videos/
+    - assets/.env
+  #   - images/a_dot_ham.jpeg
+
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  fonts:
+   - family: Barokah
+     fonts:
+       - asset: assets/fonts/bs.ttf
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

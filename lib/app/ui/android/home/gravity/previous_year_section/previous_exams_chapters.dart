@@ -1,0 +1,170 @@
+import 'package:async_builder/async_builder.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_tex/flutter_tex.dart';
+import 'package:get/get.dart';
+import 'package:getx/app/data/model/gravity/chapter.dart';
+import 'package:getx/app/data/model/gravity/subject.dart';
+import 'package:getx/app/routes/app_pages.dart';
+import '../../../../../controller/gravity/student_controller.dart';
+import '../../../../../data/constants/errors.dart';
+import '../../../../../data/constants/miscellaneous.dart';
+import '../../../../../data/model/api_response.dart';
+import '../../../../../data/model/gravity/exam.dart';
+import '../../../../../data/model/gravity/question.dart';
+import '../../../../../data/model/gravity/test_with_sections.dart';
+import '../../../widgets/gravity/question_types/test_question_widget.dart';
+import '../../../widgets/miscellaneous.dart';
+
+class PreviousYearExamsChapters extends StatefulWidget {
+  PreviousYearExamsChapters({Key? key}):super(key: key){
+    // Get.put<HostController>(HostController());
+  }
+  @override
+  State<PreviousYearExamsChapters> createState() => _State();
+}
+
+class _State extends State<PreviousYearExamsChapters> {
+  late String examId;
+  late String subjectId;
+  bool agreed = false;
+  _State(){
+    Map<String,String> data = Get.arguments;
+    examId = data['exam']!;
+    subjectId = data['subject']!;
+  }
+  @override
+  Widget build(BuildContext context) {
+    // printCity();
+    return SafeArea(
+      child: Material(
+        color: appColors["background"]!,
+        child: AsyncBuilder<APIResponse>(
+          future: Get.find<StudentsController>().getExamSubjectChapters(examId,subjectId),
+          waiting: (context) {
+            return  Center(
+              child: clumsyWaitingBar(),
+            );
+          },
+          builder: (context,apiResponse){
+            if(apiResponse!.status == TextMessages.SUCCESS)
+              {
+
+                List<Chapter> chapters = apiResponse.data as List<Chapter>;
+                // List<Question> questions = exam.questions;
+                return Scaffold(
+                  backgroundColor: appColors["background"]!,
+                  extendBodyBehindAppBar: true,
+                  body: Padding(
+                    padding: const EdgeInsets.all(18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        headerBar("Chapters",parent: true),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 50,
+                                ),
+                                // clumsyTextLabel("# Questions: ${questions.length}",fontsize: 20,color: appColors['primary']),
+                                if(chapters.isEmpty) clumsyTextLabel("Sorry, there are currently no Questions in this exam!",fontsize: 12),
+                                ...List.generate(chapters.length, (index) {
+                                  return Container(
+                                    // height: 60,
+                                    margin:const EdgeInsets.all(20) ,
+                                    // padding: const EdgeInsets.all(20),
+                                    decoration: BoxDecoration(
+                                        // border: Border.all(color: Colors.grey),
+                                        // borderRadius: BorderRadius.circular(10)
+                                    ),
+                                    child: Card(
+                                      elevation: 10,
+                                      shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)),
+
+                                      child: ListTile(
+
+                                        onTap: () async{
+                                          await Get.toNamed(Routes.EXAM_PAGE,arguments: {'subject':subjectId,'exam':examId,"chapter":chapters[index].id});
+
+                                          // await Get.toNamed(Routes.CHAPTERS_EXAM_PAGE,arguments: {'subject':subjects[index].id,'exam':examId});
+                                        },
+                                        tileColor: appColors['white'],
+                                        trailing: Icon(Icons.arrow_circle_right,color: appColors['primary'],),
+                                        shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(10)),
+
+                                        title: clumsyTextLabel(chapters[index].name.toUpperCase(),color: appColors['primary']),
+                                        subtitle: clumsyTextLabel(chapters[index].id,color: appColors['grey'],fontsize: 12) ,
+                                      ),
+                                    ),
+                                  );
+                                    // child: ListTile(
+                                    //   tileColor: appColors['white'],
+                                    //   leading: const Icon(Icons.help_center_outlined),
+                                    //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                                    //   subtitle: clumsyTextLabel(questions[index].questionType,fontsize: 18,color: appColors['primary']),
+                                    //   title:
+                                    //   // subtitle: clumsyTextLabel(DateTime.parse(exam.examDate).toIso8601String().split("T")[0],color: appColors['white'],fontsize: 12),
+                                    // ),
+
+                                }),
+                                const SizedBox(
+                                  height: 50,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              }
+            else
+              {
+                return Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        headerBar("Exam",parent: true),
+                        clumsyTextLabel(ErrorMessages.SOMETHINGS_WRONG),
+                        clumsyTextLabel(apiResponse.info!,fontsize: 10),
+                        // Text(error.toString()),
+                      ],
+                    )
+                );
+              }
+
+          },
+          error: (context, error, stackTrace) {
+            print(error.runtimeType);
+            print(error);
+            return Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+
+                    const Text("Some error Occured"),
+                    Text(error.toString()),
+
+                  ],
+                )
+            );
+          },
+        ),
+      ),
+    );
+    // return Container(
+    //   child: Column(
+    //     children: [
+    //       ClumsyMediaList(event.medias),
+    //       EventPhasesWidget(eventId: event.id, phases: event.phases)
+    //     ],
+    //   )
+    // );
+  }
+}
+
